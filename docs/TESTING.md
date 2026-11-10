@@ -2,36 +2,32 @@
 
 ## Tools
 
-- [Vitest](https://vitest.dev/) runs the suites in `test/`.
-- Coverage is collected with V8 (`@vitest/coverage-v8`) over `src/`.
+- Vitest runs the suite in `test/index.test.ts` using `describe`, `expect` and `it`.
+- The tests import the public entry point from `../src/index.js`.
+- No other test files, conformance suites, browser tests or integration tests are present in the provided repository files.
 
 ## Commands
 
 ```sh
-npm test            # vitest run --coverage
-npx vitest          # watch mode while developing
-npm run check       # every gate, including tests
+npm test
+npx vitest
+npm run check
 ```
 
 ## Rules
 
-- Coverage must stay at or above 80 % for lines, branches, functions and statements (`vitest.config.ts`).
-  Lowering the thresholds is not allowed.
-- Test through the public entry point (`src/index.ts`) and assert observable behavior: return values,
-  thrown errors and their messages.
-- Each bug fix adds a test that fails without the fix.
-- Tests are deterministic: no network, no real clock or randomness without injection, no shared state between
-  tests. Temporary files go to the OS temp directory and are removed by the test.
+- Tests exercise the public API: `contrastRatio`, `buildChartConfig`, `describeChart`, `toDataTable` and `ChartA11yError`.
+- Assertions cover exact return values, exact description strings, table headers and rows, and the `code` property of thrown `ChartA11yError` instances.
+- Each test builds its own input inline. The suite uses no network, clock, randomness, temporary files or shared mutable state.
 
 ## Tiers
 
-- Local tier (every gate run, coverage measured here): unit and property tests, plus conformance on small
-  fixtures kept in the repository.
-- CI tier: conformance that needs an external tool or a download. Name them `test/<name>.conformance.test.ts`; `vitest.config.ts` excludes them locally
-  (unless `FABRICA_CI=1`). The CI `conformance` job sets `FABRICA_CI=1` and runs the full suite. Tools are installed
-  by the optional `ci/conformance-setup.sh` (bash, CI only; verify every download against a pinned SHA-256), and
-  tagged tests skip cleanly when their tool is missing.
+- Only local unit tests exist: `test/index.test.ts`. It covers contrast calculations, chart configuration, descriptions and data tables.
+- `contrastRatio` tests cover the known ratios 4.54 for `#767676` on `#ffffff`, 21 for black on white and 21 for white on black, case-insensitive hex input, and `invalid_color` for malformed colours.
+- `buildChartConfig` tests cover line and bar charts, the default palette on white, the default palette on black, numeric x values, all-null series, colour reuse when series exceed passing colours, custom palettes with fewer passing colours than series, and error codes `insufficient_contrast`, `too_many_series` for 0 and 13 series, `too_many_points` for 10,001 x values, `length_mismatch`, `invalid_value` for `NaN`, invalid type, non-finite x numbers and invalid x types, `invalid_color` for a malformed palette colour, and `invalid_label` for empty or overlong labels.
+- `describeChart` tests cover the exact Revenue description, nulls and tied values, unit inclusion and capitalisation of the chart type.
+- `toDataTable` tests cover headers and rows with a unit, empty cells for `null`, min/max skipping `null`, and output without a unit.
 
 ## Reports
 
-Coverage reports are written to `coverage/` (text summary and `lcov`). The folder is ignored by git.
+The test file writes no reports. Any coverage output is produced by the Vitest invocation, not by the tests themselves.

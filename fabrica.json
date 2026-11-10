@@ -1,0 +1,1 @@
+{"lang": "typescript", "package": "@trysac/accessible-chart-config", "commands": {"install": [["npm", "install", "--no-audit", "--no-fund"]], "check": [["npm", "run", "check"]]}}

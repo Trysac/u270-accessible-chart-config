@@ -1,17 +1,15 @@
 # @trysac/accessible-chart-config
 
-> Turn chart data into an accessible, library-neutral chart config: WCAG 3:1 contrast-checked colours, dash and marker redundancy, a generated text summary and a data table fallback TypeScript library for Node.js 20+, published as ES modules with type declarations. MIT.
+> Turn chart data into an accessible, library-neutral chart config: WCAG 3:1 contrast-checked colours, dash and marker redundancy, a generated text summary and a data table fallback. TypeScript library for Node.js 20+, published as an ES module with type declarations. MIT.
 
 ## Docs
 
-- [README](README.md): problem, installation and usage example
-- [AGENTS.md](AGENTS.md): commands, folder map, conventions and limits for contributors and agents
-- [Architecture](docs/ARCHITECTURE.md): modules and boundaries
-- [Testing](docs/TESTING.md): how tests and coverage work
-- [Decisions](docs/decisions/0001-record-architecture-decisions.md): architecture decision records
+- [README](README.md): problem, installation, usage example and API
+- [Architecture](docs/ARCHITECTURE.md): module, boundaries and build
+- [Testing](docs/TESTING.md): the unit tests in `test/index.test.ts`
+- [Project record](docs/PROJECT.md): objective, scope, timeline and effort metrics
+- [Security](docs/SECURITY.md): threat model, secrets, dependencies and code practices
 
 ## Optional
 
 - [Stack](docs/STACK.md): tools used and discarded
-- [Project record](docs/PROJECT.md): objective, scope, timeline and effort metrics
-- [Changelog](CHANGELOG.md)

@@ -2,29 +2,27 @@
 
 ## Overview
 
-`@trysac/accessible-chart-config` is a small, dependency-free TypeScript library published to npm as ES modules with type
-declarations. Turn chart data into an accessible, library-neutral chart config: WCAG 3:1 contrast-checked colours, dash and marker redundancy, a generated text summary and a data table fallback
+`@trysac/accessible-chart-config` is a dependency-free TypeScript library published as an ES module with type declarations. It turns chart data into an accessible, library-neutral chart config: WCAG 3:1 contrast-checked colours, dash and marker redundancy, a generated text summary and a data table fallback.
 
 ## Modules
 
 | Module | Responsibility |
 |---|---|
-| `src/index.ts` | Public API. Everything consumers import is exported from here. |
+| `src/index.ts` | Public API and all library logic: validation, WCAG 2.2 contrast, palette filtering, dash and marker selection, description generation and data-table generation. |
 
-Add a row when you add a module. Internal modules are not re-exported unless they are part of the public API.
+There are no internal modules in the provided source. Everything consumers import is exported from `src/index.ts`.
 
 ## Boundaries
 
-- No runtime dependencies by default; any addition is justified in [STACK.md](STACK.md).
-- No I/O at import time. Functions are pure unless their documentation says otherwise.
-- Errors are thrown as built-in error types (`TypeError`, `RangeError`) with actionable messages.
+- No runtime dependencies; the source file imports nothing.
+- No I/O at import time or in exported functions. Functions are pure and return values or throw.
+- Validation failures and contrast failures are thrown as `ChartA11yError` with a stable `code`, not as built-in `TypeError` or `RangeError`.
+- The library does not render charts, adapt output to a chart library, sonify data or simulate colour blindness.
 
 ## Build and distribution
 
-`npm run build` compiles `src/` to `dist/` with `tsconfig.build.json`. Only `dist/` is published
-(`files` in `package.json`).
+`npm run build` compiles `src/` to `dist/` with `tsconfig.build.json`. Only `dist/` is published (`files` in `package.json`).
 
 ## Decisions
 
-Architectural decisions are recorded in [decisions/](decisions/), starting with
-[0001](decisions/0001-record-architecture-decisions.md).
+The source is a single module because the public surface is small and the functions share validation and contrast helpers. Architectural decisions beyond this file are not represented in the provided source.

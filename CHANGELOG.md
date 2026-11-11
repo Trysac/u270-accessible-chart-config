@@ -9,4 +9,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Added `@trysac/accessible-chart-config` library with WCAG-compliant color contrast checking, automatic dash and marker redundancy, and generated text descriptions and data tables.
 - Initial project structure from the factory utility template.

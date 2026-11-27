@@ -1,7 +1,6 @@
 # accessible-chart-config
 
-[![npm version](https://img.shields.io/npm/v/@trysac/accessible-chart-config.svg)](https://www.npmjs.com/package/@trysac/accessible-chart-config)
-[![license: MIT](https://img.shields.io/npm/l/@trysac/accessible-chart-config.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/Trysac/u270-accessible-chart-config/actions/workflows/ci.yml/badge.svg)](https://github.com/Trysac/u270-accessible-chart-config/actions/workflows/ci.yml)
 
 Turn chart data into an accessible, library-neutral chart config: WCAG 3:1 contrast-checked colours, dash and marker redundancy, a generated text summary and a data table fallback
@@ -12,9 +11,15 @@ Charts are often the least accessible part of a dashboard: series are told apart
 
 ## Install
 
+Not published to npm yet. Build it from a clone, then install it from the local path:
+
 ```sh
-npm install @trysac/accessible-chart-config
+git clone https://github.com/Trysac/u270-accessible-chart-config.git
+cd u270-accessible-chart-config && npm ci && npm run build
+cd ../your-project && npm install ../u270-accessible-chart-config
 ```
+
+Imports keep the package name: `import { ... } from "@trysac/accessible-chart-config"`.
 
 Requires Node.js 20 or newer. The package is an ES module with TypeScript declarations and no runtime dependencies.
 
